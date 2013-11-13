@@ -10,7 +10,6 @@ public class ProjectTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		proj.assign_team();
 	}
 
 	@Test

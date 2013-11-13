@@ -1,7 +1,9 @@
 
 public class Projects {
 
-	String project_name; 
+	String project_name;
+	Team team;
+	Sprint sprint;
 	public Projects(String string) {
 		// TODO Auto-generated constructor stub
 		this.project_name=string;
@@ -10,9 +12,9 @@ public class Projects {
 		// TODO Auto-generated method stub
 		return project_name;
 	}
-	public void assign_team() {
+	public void assign_team(Team team1) {
 		// TODO Auto-generated method stub
-		
+		team=team1;
 	}
 
 }
