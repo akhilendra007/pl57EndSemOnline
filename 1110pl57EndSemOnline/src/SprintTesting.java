@@ -7,11 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class ProjectTest {
+public class SprintTesting {
 
-	//1define team
-	Projects proj=new Projects("SRM");
-	
+	Sprint sprint=new Sprint();
 	Story story=new Story("To create Login");
 	Story story1=new Story("To create Home Page");
 	Story story2=new Story("To create Registration Details");
@@ -24,22 +22,12 @@ public class ProjectTest {
 		story.definetask("validate login",2);
 		story.definetask("test login",7);
 		
-		Sprint sprint=new Sprint();
+		
 		sprint.addsprint(story);
-		proj.addsprint(sprint);	
+		
 	}
-
 	@Test
 	public void test() {
-		assertEquals("SRM",proj.get_projectname());
+		assertEquals(false,sprint.show_team_progress());
 	}
-	@Test
-	public void test1() {
-		assertEquals("To create Login",story.getName());
-	}
-	@Test
-	public void test2() {
-		assertEquals(3,story.getTasks().size());
-	}
-	
 }

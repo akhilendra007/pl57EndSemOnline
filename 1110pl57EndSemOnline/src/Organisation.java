@@ -3,32 +3,73 @@ import java.util.ArrayList;
 
 public class Organisation {
 	static List<Projects> project_list=new ArrayList<Projects>();
-	Team team=new Team();
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//define team
+		
+		//1define team
 		Projects proj=new Projects("SRM");
 		add_project(proj);
 		
-		//create team
+		//2create team
 		assignTeam();
 		print_team(project_list.get(0));
 		
-		//define story
-		assign_story(project_list.get(0));
+		//3define story
+		Story story=assign_story(project_list.get(0),"To create Login");
+		Story story1=assign_story(project_list.get(0),"To create Home Page");
+		Story story2=assign_story(project_list.get(0),"To create Registration Details");
 		
-		//asssign sprint
+		//4define task
+		story.definetask("Create login Layout",3);
+		story.definetask("validate login",2);
+		story.definetask("test login",7);
+		
+		//5asssign sprint
+		assign_story_sprint(project_list.get(0),story);
+		
+		//6task_allocation
+		task_allocate(project_list.get(0));
+		
+		//7scrumboard
+		scrumboard(project_list.get(0));
 		
 	}
-	private static void assign_story(Projects projects) {
+	private static void scrumboard(Projects projects) {
 		// TODO Auto-generated method stub
-		Story story=new Story("To create Login ");
+		System.out.println("\n----------ScrumBoard-------\n");
+		projects.getSprint().getStories().get(0).getTasks().get(0).set_complete(true);
+		projects.getSprint().getStories().get(0).getTasks().get(1).set_complete(true);
+		projects.scrumboard();
+	}
+	private static void task_allocate(Projects projects) {
+		// TODO Auto-generated method stub
+		List<Tasks> task= projects.getSprint().getStories().get(0).getTasks();
+		System.out.println("\n------Tasks -------\n");
+		for(int i=0;i<task.size();i++)
+		{
+			System.out.println(task.get(i).task);
+		}
+		projects.allocatetask(task);
+
+	}
+	private static void assign_story_sprint(Projects projects, Story story) {
+		// TODO Auto-generated method stub
+		System.out.println("\n----------Story points added-------\n");
+		Sprint sprint=new Sprint();
+		sprint.addsprint(story);
+		project_list.get(0).addsprint(sprint);
+		
+	}
+	private static Story assign_story(Projects projects, String string) {
+		// TODO Auto-generated method stub
+		Story story=new Story(string);
 		story.setPriority(5);
 		story.setStory_points(7);
-		
+		return story;
 	}
 	private static void print_team(Projects projects) {
 		// TODO Auto-generated method stub
@@ -60,8 +101,7 @@ public class Organisation {
 		teammembers.add(coder);
 		teammembers.add(tester);
 		Team team1=new Team (teammembers,scrummaster,ProductOwner,null);
-		
+	
 		project_list.get(0).assign_team(team1);
 	}
-	
 }
